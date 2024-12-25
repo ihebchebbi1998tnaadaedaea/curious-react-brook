@@ -113,9 +113,10 @@ const GiftApp = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="bg-white/30 backdrop-blur-lg rounded-2xl p-6 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
-            <GiftBasket3D items={selectedItems} />
-          </div>
+          <GiftBasket3D 
+            items={selectedItems}
+            onItemDrop={handleItemDrop}
+          />
         </motion.div>
 
         <motion.div 

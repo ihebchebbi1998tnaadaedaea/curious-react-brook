@@ -38,7 +38,7 @@ const ProductSelectionPanel = ({ onItemDrop }: ProductSelectionPanelProps) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 border border-white/20">
       <div className="space-y-6">
         <div className="relative">
           <Search className="absolute left-3 top-3 text-gray-400" size={20} />

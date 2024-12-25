@@ -12,9 +12,10 @@ import {
 
 interface GiftBasket3DProps {
   items: Product[];
+  onItemDrop?: (item: Product) => void;
 }
 
-const GiftBasket3D = ({ items }: GiftBasket3DProps) => {
+const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
 
@@ -33,11 +34,14 @@ const GiftBasket3D = ({ items }: GiftBasket3DProps) => {
     const droppedItem = JSON.parse(e.dataTransfer.getData('product'));
     console.log('Item dropped:', droppedItem);
     playTickSound();
+    if (onItemDrop) {
+      onItemDrop(droppedItem);
+    }
   };
 
   return (
     <div 
-      className="relative h-[600px] w-full rounded-2xl bg-white shadow-2xl overflow-hidden"
+      className="relative h-[600px] w-full rounded-2xl bg-white/80 backdrop-blur-sm shadow-2xl overflow-hidden border border-white/20"
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -55,26 +59,30 @@ const GiftBasket3D = ({ items }: GiftBasket3DProps) => {
 
       {/* Items grid */}
       <div className="p-6 mt-16 h-full overflow-y-auto">
-        <AnimatePresence>
+        <AnimatePresence mode="popLayout">
           {items.length > 0 ? (
             <div className="grid grid-cols-2 gap-4">
               {items.map((item, index) => (
                 <motion.div
                   key={`${item.id}-${index}`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="bg-white rounded-lg shadow-md p-4 border border-gray-100"
+                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, y: -20 }}
+                  transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+                  className="bg-white rounded-lg shadow-md p-4 border border-gray-100 hover:shadow-lg transition-shadow"
                 >
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="relative group cursor-pointer">
                           <div className="aspect-square rounded-lg overflow-hidden bg-gray-50 mb-3">
-                            <img
+                            <motion.img
                               src={item.image}
                               alt={item.name}
                               className="w-full h-full object-contain p-2"
+                              initial={{ scale: 0.8 }}
+                              animate={{ scale: 1 }}
+                              transition={{ duration: 0.2 }}
                             />
                           </div>
                           <h4 className="text-sm font-medium text-gray-900 truncate">{item.name}</h4>
