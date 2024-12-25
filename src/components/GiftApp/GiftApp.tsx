@@ -14,14 +14,12 @@ export interface GiftPack {
   items: Product[];
   totalPrice: number;
   note?: string;
-  ribbonColor?: string;
 }
 
 const GiftApp = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedItems, setSelectedItems] = useState<Product[]>([]);
   const [packNote, setPackNote] = useState("");
-  const [ribbonColor, setRibbonColor] = useState("#700100");
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
@@ -130,8 +128,6 @@ const GiftApp = () => {
             items={selectedItems}
             note={packNote}
             onNoteChange={setPackNote}
-            ribbonColor={ribbonColor}
-            onRibbonColorChange={setRibbonColor}
           />
           <ConfirmationButton
             onConfirm={handleConfirmPack}
