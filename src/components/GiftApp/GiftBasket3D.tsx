@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product } from '@/types/product';
-import { Gift, Package, ShoppingBag, Plus } from 'lucide-react';
+import { Gift, Plus } from 'lucide-react';
 import { playTickSound } from '@/utils/audio';
 import {
   Tooltip,
@@ -17,9 +17,8 @@ interface GiftBasket3DProps {
 
 const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
   const [isDraggingOver, setIsDraggingOver] = useState(false);
-  const totalPrice = items.reduce((sum, item) => sum + item.price, 0);
 
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDraggingOver(true);
   };
@@ -28,7 +27,7 @@ const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
     setIsDraggingOver(false);
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsDraggingOver(false);
     const droppedItem = JSON.parse(e.dataTransfer.getData('product'));
@@ -41,24 +40,12 @@ const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
 
   return (
     <div 
-      className="relative h-[600px] w-full rounded-2xl bg-white/80 backdrop-blur-sm shadow-2xl overflow-hidden border border-white/20"
+      className="relative h-[600px] w-full rounded-2xl bg-white/95 backdrop-blur-sm shadow-2xl overflow-hidden border border-gray-100"
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
-      {/* Header with total price */}
-      <div className="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-[#700100] to-transparent text-white">
-        <div className="flex justify-between items-center">
-          <h3 className="text-lg font-medium">Votre Pack Cadeau</h3>
-          <div className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5" />
-            <span className="text-xl font-bold">{totalPrice.toFixed(2)} TND</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Items grid */}
-      <div className="p-6 mt-16 h-full overflow-y-auto">
+      <div className="p-6 h-full overflow-y-auto">
         <AnimatePresence mode="popLayout">
           {items.length > 0 ? (
             <div className="grid grid-cols-2 gap-4">
@@ -69,7 +56,7 @@ const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.8, y: -20 }}
                   transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
-                  className="bg-white rounded-lg shadow-md p-4 border border-gray-100 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl shadow-lg p-4 border border-gray-50 hover:shadow-xl transition-all transform hover:-translate-y-1"
                 >
                   <TooltipProvider>
                     <Tooltip>
@@ -86,11 +73,11 @@ const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
                             />
                           </div>
                           <h4 className="text-sm font-medium text-gray-900 truncate">{item.name}</h4>
-                          <p className="text-sm text-[#700100]">{item.price} TND</p>
+                          <p className="text-sm text-[#700100] font-semibold">{item.price} TND</p>
                         </div>
                       </TooltipTrigger>
                       <TooltipContent>
-                        <p className="text-sm">{item.name}</p>
+                        <p className="text-sm font-medium">{item.name}</p>
                         <p className="text-xs text-gray-500">{item.description}</p>
                       </TooltipContent>
                     </Tooltip>
@@ -124,24 +111,23 @@ const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
                 <Gift className="w-20 h-20 text-[#700100] mx-auto" />
               </motion.div>
               <h3 className="text-xl font-medium text-[#700100] mb-2">
-                Créez Votre Pack Cadeau
+                Composez Votre Pack
               </h3>
               <p className="text-gray-500 max-w-sm">
-                Glissez et déposez vos articles préférés ici pour créer un pack cadeau unique
+                Glissez et déposez vos articles préférés ici
               </p>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Drop overlay */}
       <AnimatePresence>
         {isDraggingOver && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-[#700100]/10 backdrop-blur-sm flex items-center justify-center"
+            className="absolute inset-0 bg-[#700100]/5 backdrop-blur-sm flex items-center justify-center"
           >
             <motion.div
               animate={{
@@ -151,7 +137,7 @@ const GiftBasket3D = ({ items, onItemDrop }: GiftBasket3DProps) => {
                 duration: 1,
                 repeat: Infinity,
               }}
-              className="bg-white/90 rounded-full p-6"
+              className="bg-white/90 rounded-full p-6 shadow-2xl"
             >
               <Plus className="w-12 h-12 text-[#700100]" />
             </motion.div>
