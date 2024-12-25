@@ -1,22 +1,20 @@
 import { LucideIcon } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardDescription } from "./ui/card";
+import { Card } from "@/components/ui/card";
 
 interface FeatureCardProps {
-  icon: LucideIcon;
   title: string;
   description: string;
+  Icon: LucideIcon;
 }
 
-export const FeatureCard = ({ icon: Icon, title, description }: FeatureCardProps) => {
+const FeatureCard = ({ title, description, Icon }: FeatureCardProps) => {
   return (
-    <Card className="card-hover">
-      <CardHeader>
-        <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-          <Icon className="h-6 w-6 text-primary" />
-        </div>
-        <CardTitle className="mb-2">{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
+    <Card className="p-6 hover:shadow-lg transition-shadow duration-200">
+      <Icon className="h-12 w-12 text-[#9b87f5] mb-4" />
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-gray-600">{description}</p>
     </Card>
   );
 };
+
+export default FeatureCard;
