@@ -21,7 +21,7 @@ const PackSummary = ({
 
   return (
     <motion.div 
-      className="bg-white/30 backdrop-blur-lg rounded-2xl p-6 space-y-6 shadow-xl border border-white/20"
+      className="bg-white/90 backdrop-blur-lg rounded-2xl p-6 space-y-6 shadow-xl border border-white/20"
       whileHover={{ scale: 1.01 }}
       transition={{ duration: 0.3 }}
     >

@@ -82,7 +82,7 @@ const GiftApp = () => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-screen bg-[#F1F0FB]">
+      <div className="flex items-center justify-center h-screen bg-gradient-to-br from-white to-gray-100">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -96,45 +96,55 @@ const GiftApp = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F1F0FB] to-[#E5DEFF] p-4 md:p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        <motion.div 
-          className="lg:col-span-4"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <ProductSelectionPanel onItemDrop={handleItemDrop} />
-        </motion.div>
-
-        <motion.div 
-          className="lg:col-span-4"
-          initial={{ opacity: 0, y: 20 }}
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100 p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <motion.h1 
+          className="text-3xl md:text-4xl font-serif text-[#471818] text-center mb-8"
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <GiftBasket3D 
-            items={selectedItems}
-            onItemDrop={handleItemDrop}
-          />
-        </motion.div>
+          Créez Votre Pack Cadeau Personnalisé
+        </motion.h1>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <motion.div 
+            className="lg:col-span-4"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <ProductSelectionPanel onItemDrop={handleItemDrop} />
+          </motion.div>
 
-        <motion.div 
-          className="lg:col-span-4"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <PackSummary
-            items={selectedItems}
-            note={packNote}
-            onNoteChange={setPackNote}
-          />
-          <ConfirmationButton
-            onConfirm={handleConfirmPack}
-            disabled={selectedItems.length === 0}
-          />
-        </motion.div>
+          <motion.div 
+            className="lg:col-span-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <GiftBasket3D 
+              items={selectedItems}
+              onItemDrop={handleItemDrop}
+            />
+          </motion.div>
+
+          <motion.div 
+            className="lg:col-span-4"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <PackSummary
+              items={selectedItems}
+              note={packNote}
+              onNoteChange={setPackNote}
+            />
+            <ConfirmationButton
+              onConfirm={handleConfirmPack}
+              disabled={selectedItems.length === 0}
+            />
+          </motion.div>
+        </div>
       </div>
     </div>
   );
