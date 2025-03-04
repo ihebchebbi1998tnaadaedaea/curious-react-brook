@@ -8,4 +8,11 @@ export interface Product {
   isPersonalizable?: boolean;
   type?: string; // Changed from string literal union to accept any string
   category?: string;
+  availableColors?: ProductColor[];
+}
+
+export interface ProductColor {
+  name: string;
+  value: string;
+  border?: string;
 }

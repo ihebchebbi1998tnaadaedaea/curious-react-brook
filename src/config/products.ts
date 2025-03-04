@@ -1,4 +1,3 @@
-
 export interface ProductConfig {
   id: string;
   name: string;
@@ -10,6 +9,13 @@ export interface ProductConfig {
   type: string;
   metier_type: string;
   isPersonalizable: boolean;
+  availableColors?: ProductColor[];
+}
+
+export interface ProductColor {
+  name: string;
+  value: string;
+  border?: string;
 }
 
 export const products: ProductConfig[] = [
@@ -23,7 +29,12 @@ export const products: ProductConfig[] = [
     category: "vetements-cuisine",
     type: "vestes",
     metier_type: "Restauration",
-    isPersonalizable: true
+    isPersonalizable: true,
+    availableColors: [
+      { name: "Blanc", value: "#FFFFFF", border: "border-gray-200" },
+      { name: "Noir", value: "#000000" },
+      { name: "Bleu Marine", value: "#1B2C4B" }
+    ]
   },
   {
     id: "tablier-cuisine-1",

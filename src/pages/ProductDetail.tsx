@@ -31,12 +31,16 @@ const ProductDetail = () => {
   const productImages = getProductImages(id || '');
   const product = products.find(p => p.id === id);
 
-  const availableColors = [
+  // Default colors if product doesn't have specific colors
+  const defaultColors = [
     { name: "Blanc", value: "#FFFFFF", border: "border-gray-200" },
     { name: "Noir", value: "#000000" },
     { name: "Bleu Marine", value: "#1B2C4B" },
     { name: "Rouge", value: "#DC2626" },
   ];
+
+  // Use product's available colors if defined, otherwise use default colors
+  const availableColors = product?.availableColors || defaultColors;
 
   if (!product) {
     return <div>Product not found</div>;
