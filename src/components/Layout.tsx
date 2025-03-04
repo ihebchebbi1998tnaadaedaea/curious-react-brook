@@ -58,21 +58,23 @@ export const Layout = () => {
 
       <nav className="w-full bg-white border-b sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto">
-          <div className="flex items-center justify-between py-4 px-4">
-            <MobileMenu 
-              menuItems={menuItems}
-              activeMenuItem={activeMenuItem}
-              setActiveMenuItem={setActiveMenuItem}
-              isSubmenuOpen={isSubmenuOpen}
-              setIsSubmenuOpen={setIsSubmenuOpen}
-              handleNavigation={handleNavigation}
-            />
+          <div className="flex items-center justify-between py-3 px-4">
+            <div className="flex items-center gap-8">
+              <MobileMenu 
+                menuItems={menuItems}
+                activeMenuItem={activeMenuItem}
+                setActiveMenuItem={setActiveMenuItem}
+                isSubmenuOpen={isSubmenuOpen}
+                setIsSubmenuOpen={setIsSubmenuOpen}
+                handleNavigation={handleNavigation}
+              />
 
-            <Link to="/" className="flex-shrink-0">
-              <img src="/logo.png" alt="ELLES" className="h-14" />
-            </Link>
-
-            <SearchBar />
+              <Link to="/" className="flex-shrink-0">
+                <img src="/logo.png" alt="ELLES" className="h-12" />
+              </Link>
+              
+              <SearchBar />
+            </div>
 
             <HeaderActions 
               favoritesCount={favorites.length}
@@ -80,7 +82,7 @@ export const Layout = () => {
             />
           </div>
 
-          <div className="md:hidden px-4 pb-4">
+          <div className="md:hidden px-4 pb-3">
             <SearchBar mobile={true} />
           </div>
 
