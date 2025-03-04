@@ -10,6 +10,7 @@ import {
 import { SubItem } from '@/config/menuConfig';
 import { Check, ChevronRight } from 'lucide-react';
 import Image from '@/components/ui/image';
+import { getCategoryBanner } from '@/utils/categoryImageMappings';
 
 interface CategoryLinkProps {
   href: string;
@@ -64,6 +65,9 @@ const CategoryLink: React.FC<CategoryLinkProps> = ({
 
     return imageMap[title] || currentImage;
   };
+
+  // Get the category banner for the right side image
+  const categoryBanner = getCategoryBanner(href);
 
   return (
     <NavigationMenuItem>
@@ -137,9 +141,9 @@ const CategoryLink: React.FC<CategoryLinkProps> = ({
                 <div className="col-span-1 flex flex-col items-center md:items-start">
                   <div className="aspect-square md:aspect-[3/4] rounded-lg overflow-hidden bg-white w-full max-w-[200px] md:max-w-none shadow-md hover:shadow-lg transition-shadow">
                     <Image 
-                      src="/placeholder.png" 
+                      src={categoryBanner} 
                       alt={topText}
-                      className="w-full h-full object-contain" 
+                      className="w-full h-full object-cover" 
                     />
                   </div>
                   <div className="mt-2 lg:mt-4 text-center md:text-left">

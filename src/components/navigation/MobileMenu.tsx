@@ -13,6 +13,7 @@ import {
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from "@/lib/utils";
 import Image from '@/components/ui/image';
+import { getCategoryBanner } from '@/utils/categoryImageMappings';
 
 interface MobileMenuProps {
   menuItems: MenuItem[];
@@ -134,6 +135,18 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                 </Button>
                 <SheetTitle className="mt-2">{activeMenuItem.title}</SheetTitle>
               </SheetHeader>
+              
+              {/* Banner Image Section */}
+              <div className="p-4 border-b">
+                <div className="aspect-video rounded-lg overflow-hidden shadow-md">
+                  <Image 
+                    src={getCategoryBanner(activeMenuItem.path)} 
+                    alt={activeMenuItem.title}
+                    className="w-full h-full object-cover" 
+                  />
+                </div>
+              </div>
+              
               <div className="flex-1 overflow-y-auto p-4 space-y-4">
                 {activeMenuItem.subItems.map((subItem) => {
                   const subitemImage = getSubitemImage(subItem.title, subItem.image);
