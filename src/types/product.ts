@@ -6,6 +6,6 @@ export interface Product {
   startingPrice: string;
   image?: string;
   isPersonalizable?: boolean;
-  type?: 'clothing' | 'footwear' | 'accessoires' | 'pack';
+  type?: string; // Changed from string literal union to accept any string
   category?: string;
 }
